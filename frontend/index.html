@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1D9E75" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="বাকি ট্র্যাকার" />
+  <title>বাকি ট্র্যাকার — Baki Tracker</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">৳</div>
+        <div class="brand-text">
+          <span class="brand-name">বাকি ট্র্যাকার</span>
+          <span class="brand-tag">Baki Tracker</span>
+        </div>
+      </div>
+      <span class="version">v0.1</span>
+    </header>
+
+    <main class="content">
+      <div class="hero">
+        <h1>দোকানের বাকি, এক জায়গায়</h1>
+        <p>Phase 0 — foundation is live. The pipeline works.</p>
+      </div>
+
+      <section class="status-card">
+        <div class="status-head">
+          <i class="dot" id="dot-server"></i>
+          <span>Backend server</span>
+          <span class="status-val" id="val-server">checking…</span>
+        </div>
+        <div class="status-head">
+          <i class="dot" id="dot-db"></i>
+          <span>Database (Supabase)</span>
+          <span class="status-val" id="val-db">checking…</span>
+        </div>
+        <div class="status-head">
+          <i class="dot" id="dot-pwa"></i>
+          <span>PWA / offline shell</span>
+          <span class="status-val" id="val-pwa">checking…</span>
+        </div>
+      </section>
+
+      <div class="next">
+        <p class="next-label">Next up</p>
+        <p class="next-text">Phase 1 — Phone + OTP login</p>
+      </div>
+    </main>
+
+    <nav class="bottomnav">
+      <button class="nav-item active"><span class="nav-ico">⌂</span>হোম</button>
+      <button class="nav-item" disabled><span class="nav-ico">☰</span>কাস্টমার</button>
+      <button class="nav-item" disabled><span class="nav-ico">▤</span>রিপোর্ট</button>
+      <button class="nav-item" disabled><span class="nav-ico">⚙</span>সেটিংস</button>
+    </nav>
+
+    <button class="fab" disabled aria-label="নতুন বাকি">+</button>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

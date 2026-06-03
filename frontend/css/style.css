@@ -1,0 +1,148 @@
+:root {
+  --green: #1D9E75;
+  --green-bg: #1D9E7515;
+  --red: #E24B4A;
+  --red-bg: #E24B4A15;
+  --amber: #EF9F27;
+  --amber-bg: #EF9F2718;
+  --ink: #14201b;
+  --muted: #6b7a72;
+  --line: #e7ece9;
+  --surface: #ffffff;
+  --bg: #f6f8f7;
+  --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  position: relative;
+  padding-bottom: 72px;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top) + 16px) 20px 16px;
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo {
+  width: 40px; height: 40px;
+  background: var(--green);
+  color: #fff;
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.brand-name { display: block; font-size: 16px; font-weight: 600; line-height: 1.2; }
+.brand-tag { display: block; font-size: 11px; color: var(--muted); font-family: 'Plus Jakarta Sans', sans-serif; }
+.version {
+  font-size: 11px; color: var(--muted);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg); padding: 4px 8px; border-radius: 6px;
+}
+
+/* Content */
+.content { flex: 1; padding: 24px 20px; }
+.hero { margin-bottom: 24px; }
+.hero h1 { font-size: 22px; font-weight: 600; line-height: 1.35; margin-bottom: 6px; }
+.hero p { font-size: 13px; color: var(--muted); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* Status card */
+.status-card {
+  background: var(--surface);
+  border: 0.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 4px 16px;
+  margin-bottom: 20px;
+}
+.status-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 0;
+  font-size: 14px; font-weight: 500;
+  border-bottom: 0.5px solid var(--line);
+}
+.status-card .status-head:last-child { border-bottom: none; }
+.status-val {
+  margin-left: auto;
+  font-size: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--muted);
+}
+.dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--amber);
+  flex-shrink: 0;
+  transition: background .3s;
+}
+.dot.ok { background: var(--green); }
+.dot.fail { background: var(--red); }
+.status-val.ok { color: var(--green); }
+.status-val.fail { color: var(--red); }
+
+/* Next */
+.next {
+  background: var(--green-bg);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.next-label { font-size: 11px; color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 4px; }
+.next-text { font-size: 15px; font-weight: 500; }
+
+/* Bottom nav */
+.bottomnav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  max-width: 480px; margin: 0 auto;
+  display: flex;
+  background: var(--surface);
+  border-top: 0.5px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.nav-item {
+  flex: 1;
+  background: none; border: none;
+  padding: 12px 0 14px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  cursor: pointer;
+}
+.nav-item.active { color: var(--green); }
+.nav-item:disabled { opacity: .45; }
+.nav-ico { font-size: 18px; }
+
+/* FAB */
+.fab {
+  position: fixed;
+  bottom: calc(72px + env(safe-area-inset-bottom));
+  right: max(20px, calc(50% - 240px + 20px));
+  width: 56px; height: 56px;
+  border-radius: 20px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  font-size: 28px; font-weight: 300;
+  box-shadow: 0 4px 16px rgba(29,158,117,.35);
+  cursor: pointer;
+}
+.fab:disabled { opacity: .5; }
