@@ -17,57 +17,141 @@
 </head>
 <body>
   <div class="app">
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo">৳</div>
-        <div class="brand-text">
-          <span class="brand-name">বাকি ট্র্যাকার</span>
-          <span class="brand-tag">Baki Tracker</span>
+
+    <!-- ============ LOGIN SCREEN ============ -->
+    <div id="screen-login" class="screen active">
+      <div class="auth-container">
+        <div class="auth-logo">
+          <div class="logo">৳</div>
+          <h1 class="auth-title">বাকি ট্র্যাকার</h1>
+          <p class="auth-subtitle">দোকানের বাকি, এক জায়গায়</p>
+        </div>
+
+        <form id="form-login" class="auth-form">
+          <label class="input-label" for="input-phone">ফোন নম্বর</label>
+          <div class="phone-input-group">
+            <span class="country-code">+880</span>
+            <input
+              type="tel"
+              id="input-phone"
+              class="input-field phone-field"
+              placeholder="01XXXXXXXXX"
+              maxlength="11"
+              inputmode="numeric"
+              autocomplete="tel"
+              required
+            />
+          </div>
+          <p id="login-error" class="error-text" style="display:none"></p>
+          <button type="submit" id="btn-send-otp" class="btn-primary">OTP পাঠান</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============ OTP SCREEN ============ -->
+    <div id="screen-otp" class="screen">
+      <div class="auth-container">
+        <div class="auth-logo">
+          <div class="logo">৳</div>
+          <h1 class="auth-title">কোড যাচাই</h1>
+          <p class="auth-subtitle">আপনার ফোনে পাঠানো ৬ সংখ্যার কোডটি লিখুন</p>
+        </div>
+
+        <form id="form-otp" class="auth-form">
+          <label class="input-label" for="input-otp">OTP কোড</label>
+          <input
+            type="text"
+            id="input-otp"
+            class="input-field otp-field"
+            placeholder="000000"
+            maxlength="6"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            required
+          />
+          <p id="otp-error" class="error-text" style="display:none"></p>
+          <button type="submit" id="btn-verify" class="btn-primary">যাচাই করুন</button>
+        </form>
+
+        <div class="auth-footer">
+          <button type="button" id="btn-resend" class="btn-link" disabled>আবার পাঠান (60s)</button>
+          <button type="button" id="btn-back-login" class="btn-link">ফিরে যান</button>
         </div>
       </div>
-      <span class="version">v0.1</span>
-    </header>
+    </div>
 
-    <main class="content">
-      <div class="hero">
-        <h1>দোকানের বাকি, এক জায়গায়</h1>
-        <p>Phase 0 — foundation is live. The pipeline works.</p>
+    <!-- ============ SHOP SETUP SCREEN ============ -->
+    <div id="screen-setup" class="screen">
+      <div class="auth-container">
+        <div class="auth-logo">
+          <div class="logo">৳</div>
+          <h1 class="auth-title">স্বাগতম!</h1>
+          <p class="auth-subtitle">আপনার দোকানের নাম দিন</p>
+        </div>
+
+        <form id="form-setup" class="auth-form">
+          <label class="input-label" for="input-shop-name">দোকানের নাম</label>
+          <input
+            type="text"
+            id="input-shop-name"
+            class="input-field"
+            placeholder="যেমন: করিম স্টোর"
+            maxlength="100"
+            required
+          />
+          <p id="setup-error" class="error-text" style="display:none"></p>
+          <button type="submit" id="btn-setup" class="btn-primary">শুরু করুন</button>
+        </form>
       </div>
+    </div>
 
-      <section class="status-card">
-        <div class="status-head">
-          <i class="dot" id="dot-server"></i>
-          <span>Backend server</span>
-          <span class="status-val" id="val-server">checking…</span>
+    <!-- ============ DASHBOARD SCREEN ============ -->
+    <div id="screen-dashboard" class="screen">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo">৳</div>
+          <div class="brand-text">
+            <span class="brand-name">বাকি ট্র্যাকার</span>
+            <span class="brand-tag">Baki Tracker</span>
+          </div>
         </div>
-        <div class="status-head">
-          <i class="dot" id="dot-db"></i>
-          <span>Database (Supabase)</span>
-          <span class="status-val" id="val-db">checking…</span>
+        <button class="btn-signout" id="btn-signout">লগআউট</button>
+      </header>
+
+      <main class="content">
+        <div class="hero">
+          <h1>দোকানের বাকি, এক জায়গায়</h1>
+          <p>Phase 1 — Auth complete. Dashboard coming in Phase 2.</p>
         </div>
-        <div class="status-head">
-          <i class="dot" id="dot-pwa"></i>
-          <span>PWA / offline shell</span>
-          <span class="status-val" id="val-pwa">checking…</span>
+
+        <section class="status-card">
+          <div class="status-head">
+            <i class="dot ok"></i>
+            <span>লগইন সফল</span>
+            <span class="status-val ok">authenticated</span>
+          </div>
+        </section>
+
+        <div class="next">
+          <p class="next-label">Next up</p>
+          <p class="next-text">Phase 2 — Customers + Transactions</p>
         </div>
-      </section>
+      </main>
 
-      <div class="next">
-        <p class="next-label">Next up</p>
-        <p class="next-text">Phase 1 — Phone + OTP login</p>
-      </div>
-    </main>
+      <nav class="bottomnav">
+        <button class="nav-item active"><span class="nav-ico">⌂</span>হোম</button>
+        <button class="nav-item" disabled><span class="nav-ico">☰</span>কাস্টমার</button>
+        <button class="nav-item" disabled><span class="nav-ico">▤</span>রিপোর্ট</button>
+        <button class="nav-item" disabled><span class="nav-ico">⚙</span>সেটিংস</button>
+      </nav>
 
-    <nav class="bottomnav">
-      <button class="nav-item active"><span class="nav-ico">⌂</span>হোম</button>
-      <button class="nav-item" disabled><span class="nav-ico">☰</span>কাস্টমার</button>
-      <button class="nav-item" disabled><span class="nav-ico">▤</span>রিপোর্ট</button>
-      <button class="nav-item" disabled><span class="nav-ico">⚙</span>সেটিংস</button>
-    </nav>
+      <button class="fab" disabled aria-label="নতুন বাকি">+</button>
+    </div>
 
-    <button class="fab" disabled aria-label="নতুন বাকি">+</button>
   </div>
 
-  <script src="/static/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/auth.js"></script>
 </body>
 </html>

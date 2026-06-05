@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
-from routers import health
+from routers import health, auth
 
 app = FastAPI(title="Baki Tracker", version="0.1.0")
 
@@ -28,6 +28,7 @@ app.add_middleware(
 
 # --- API routes ---
 app.include_router(health.router)
+app.include_router(auth.router)
 
 # --- Frontend (PWA) ---
 # The frontend folder sits one level up from /backend.

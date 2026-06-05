@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     supabase_url: str = ""
     supabase_anon_key: str = ""
     supabase_service_key: str = ""  # server-side only, never expose to frontend
+    supabase_jwt_secret: str = ""
 
     # App
     app_env: str = "development"

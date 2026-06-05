@@ -12,6 +12,7 @@ from supabase import create_client, Client
 from config import settings
 
 _client: Client | None = None
+_service_client: Client | None = None
 
 
 def get_supabase() -> Client | None:
@@ -23,3 +24,14 @@ def get_supabase() -> Client | None:
         return None
     _client = create_client(settings.supabase_url, settings.supabase_anon_key)
     return _client
+
+
+def get_supabase_service() -> Client | None:
+    """Return a cached Supabase client using the service role key (bypasses RLS)."""
+    global _service_client
+    if _service_client is not None:
+        return _service_client
+    if not settings.supabase_url or not settings.supabase_service_key:
+        return None
+    _service_client = create_client(settings.supabase_url, settings.supabase_service_key)
+    return _service_client
