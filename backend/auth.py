@@ -1,23 +1,15 @@
-import base64
-from fastapi import Request, HTTPException
 import jwt
+from jwt import PyJWKClient
+from fastapi import Request, HTTPException
 from config import settings
 
-
-def _get_jwt_key() -> bytes:
-    secret = settings.supabase_jwt_secret
-    try:
-        return base64.b64decode(secret)
-    except Exception:
-        return secret.encode("utf-8")
+_jwks_client = PyJWKClient(
+    f"{settings.supabase_url}/auth/v1/.well-known/jwks.json",
+    cache_keys=True,
+)
 
 
 def get_current_user(request: Request) -> str:
-    """FastAPI dependency — extracts and validates the Supabase JWT.
-
-    Returns the user's UUID (sub claim).
-    Raises 401 if the token is missing, expired, or invalid.
-    """
     auth_header = request.headers.get("authorization", "")
     if not auth_header.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Missing auth token")
@@ -25,12 +17,11 @@ def get_current_user(request: Request) -> str:
     token = auth_header[7:]
 
     try:
-        header = jwt.get_unverified_header(token)
-        alg = header.get("alg", "HS256")
+        signing_key = _jwks_client.get_signing_key_from_jwt(token)
         payload = jwt.decode(
             token,
-            _get_jwt_key(),
-            algorithms=[alg],
+            signing_key.key,
+            algorithms=["ES256"],
             audience="authenticated",
         )
     except jwt.ExpiredSignatureError:
