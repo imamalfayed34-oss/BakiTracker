@@ -1,6 +1,15 @@
+import base64
 from fastapi import Request, HTTPException
 import jwt
 from config import settings
+
+
+def _get_jwt_key() -> bytes:
+    secret = settings.supabase_jwt_secret
+    try:
+        return base64.b64decode(secret)
+    except Exception:
+        return secret.encode("utf-8")
 
 
 def get_current_user(request: Request) -> str:
@@ -18,7 +27,7 @@ def get_current_user(request: Request) -> str:
     try:
         payload = jwt.decode(
             token,
-            settings.supabase_jwt_secret,
+            _get_jwt_key(),
             algorithms=["HS256"],
             audience="authenticated",
         )
