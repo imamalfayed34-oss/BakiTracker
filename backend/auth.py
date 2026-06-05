@@ -25,10 +25,12 @@ def get_current_user(request: Request) -> str:
     token = auth_header[7:]
 
     try:
+        header = jwt.get_unverified_header(token)
+        alg = header.get("alg", "HS256")
         payload = jwt.decode(
             token,
             _get_jwt_key(),
-            algorithms=["HS256"],
+            algorithms=[alg],
             audience="authenticated",
         )
     except jwt.ExpiredSignatureError:
