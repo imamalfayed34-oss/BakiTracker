@@ -2,7 +2,7 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from auth import get_current_user
-from database import get_supabase, get_supabase_service
+from database import get_supabase_service
 
 logger = logging.getLogger(__name__)
 
@@ -15,9 +15,9 @@ class ProfileCreate(BaseModel):
 
 @router.get("/me")
 def get_profile(user_id: str = Depends(get_current_user)):
-    client = get_supabase()
+    client = get_supabase_service()
     if client is None:
-        raise HTTPException(status_code=503, detail="Database not configured")
+        raise HTTPException(status_code=503, detail="Service key not configured")
 
     result = client.table("users").select("*").eq("id", user_id).execute()
 
