@@ -160,10 +160,13 @@ async function checkAuthState() {
     } else if (response.ok) {
       showScreen('screen-dashboard');
     } else {
-      await supabaseClient.auth.signOut();
+      var errBody = await response.json().catch(function() { return {}; });
+      console.error('Auth check failed:', response.status, errBody);
+      showError('login-error', 'Auth error: ' + (errBody.detail || response.status));
       showScreen('screen-login');
     }
   } catch (err) {
+    console.error('Auth check error:', err);
     showScreen('screen-login');
   }
 }
